@@ -30,8 +30,15 @@ router.patch(
 router.get("/search", authMiddleware, vehicleCtr.searchVehicle);
 /**Events Managment ********/
 router.get("/events", authMiddleware, vehicleCtr.getVehicleEvents);
+router.get("/getAll", authMiddleware, vehicleCtr.getAllEvents);
 router.post("/setevent", authMiddleware, vehicleCtr.createEvent);
 router.patch("/acceptEvent/:id", authMiddleware, vehicleCtr.updateEvent);
 router.delete("/deleteEvent/:id", authMiddleware, vehicleCtr.deleteEvent);
+router.patch(
+  "/updateVehicleEvent/:id",
+  
+  authMiddleware,
+  vehicleCtr.updateVehicleEvent
+);
 
 module.exports = router;

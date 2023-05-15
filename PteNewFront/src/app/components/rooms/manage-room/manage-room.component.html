@@ -1,0 +1,49 @@
+<h2>{{ data.title }}</h2>
+<div class="main-content">
+  <table>
+    <th></th>
+    <tr>
+      <td><strong>Applicant</strong></td>
+      <td><img [src]="'http://localhost:3001/images/'+ data.applicant.image" alt="Applicant Image"></td>
+      <td> {{data.applicant.firstName}} {{data.applicant.lastName}}</td>
+      
+      
+    </tr>
+
+    
+    <tr>
+      <td><strong>Start</strong></td>
+      <td colspan="2">{{ data.start | date:'MMM d, y, h:mm a'}}</td>
+    </tr>
+    <tr>
+      <td><strong>End</strong></td>
+      <td colspan="2">{{ data.end | date:'MMM d, y, h:mm a' }}</td>
+    </tr>
+    <tr>
+      <td><strong>Status</strong></td>
+      <td colspan="2">{{ data.isAccepted ? 'Accepted' : 'Pending' }}</td>
+      
+    </tr>
+  </table>
+  
+  <div class="edit">  <a  *ngIf="checkForUpdate()"   (click)="openMiniForm()">
+    <mat-icon matSuffix>edit</mat-icon>
+  </a></div>
+  
+  
+  <div class="buttons">
+   <div *ngIf="checkAdmin()"> <a *ngIf="!data.isAccepted"  a  class="button-green" (click)="acceptEvent()">
+      Accept
+    </a></div>
+    
+    <a  *ngIf="checkApplicant()"  class="button-red" (click)="deleteEvent()">
+      Delete
+    </a>
+
+    
+  </div>
+
+ 
+
+</div>
+

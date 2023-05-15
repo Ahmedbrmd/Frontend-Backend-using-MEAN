@@ -1,0 +1,81 @@
+<app-sidebar></app-sidebar>
+<app-navbar></app-navbar>
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">Users</h4>
+            </div>
+            <div class="card-body">
+              
+              <div class="search-bar">
+              <mat-form-field>
+                <mat-label></mat-label>
+                
+                <input matInput (ngModelChange)="searchUser(key.value)"
+                  #key="ngModel" ngModel name="key" id="searchName"
+                  type="text" placeholder="Enter search text">
+                  <mat-icon matSuffix >search</mat-icon>
+              </mat-form-field>
+            </div>
+              <div class="vehicle-container">
+                <div class="vehicle-box" *ngFor="let worker of workers" [class.selected]="worker._id === SelectedUserId" (click)="onUserClick(worker._id)">
+                  <table>
+                  <div class="room-items">
+                  
+                    <tr>
+                   <td> <img [src]="'http://localhost:3001/images/'+ worker.image" ></td>
+                   <td> <div class="person-details"> {{worker.firstName}} {{worker.lastName}}</div></td>
+                  </tr>
+                 
+                  <tr>
+                  <td><div class="user-title"><mat-icon matSuffix >badge</mat-icon>{{ worker.title }}</div></td>
+                
+
+                  <td>
+                    <div class="user-dapar">
+                      <mat-icon matSuffix>apartment</mat-icon>
+                      {{ getDepartmentName(worker.department) }}
+                    </div>
+                  </td>
+                  
+                  
+                  
+                </tr>
+           
+              </div>
+              
+             
+            </table>
+            <div class="delete-icon" *ngIf="checkAdmin()">    <a (click)="deleteUser(worker._id)"> <mat-icon matSuffix color="red">delete</mat-icon></a> </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="calendarcontainer" *ngIf="showCalendar">
+    <div class="key-definition">
+      <div class="key-item">
+        <div class="event-color-blue"><mat-icon matSuffix color="blue" >radio_button_unchecked</mat-icon></div>
+        <div class="event-label">Your Accepted Events</div>
+      </div>
+      <div class="key-item">
+        <div class="event-color-green"><mat-icon matSuffix color="green">check_box_outline_blank</mat-icon></div>
+        <div class="event-label">Other Users Accepted Events</div>
+      </div>
+      <div class="key-item">
+        <div class="event-color-orange"><mat-icon matSuffix color="orange">check_box_outline_blank</mat-icon></div>
+        <div class="event-label">Pending Events</div>
+      </div>
+    </div>
+    <full-calendar #calendar [options]="calendarOptions" ></full-calendar>
+  </div>
+  

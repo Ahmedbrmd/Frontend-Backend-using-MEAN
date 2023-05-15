@@ -1,0 +1,26 @@
+<nav class="navbar">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+            
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img [src]="img"  class="profile-image"  routerLinkActive="active" (click)="toggleDropdown()">
+                    </button>
+                    <div class="dropdown-menu" id="Dropdown">
+
+                        <div class="user-name">  {{firstName}}</div>
+                        
+                        <a  class="dropdown-item" [routerLink]="'/profile'" >Profile</a>
+                        <a  class="dropdown-item" (click)="logout()" >Logout</a>
+
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</nav>
+
+
+

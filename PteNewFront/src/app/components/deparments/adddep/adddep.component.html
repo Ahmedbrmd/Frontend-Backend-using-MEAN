@@ -1,0 +1,22 @@
+<div class="main-content">
+    <form [formGroup]="form">
+        
+      
+      <label><strong>Department name</strong> </label>
+      <mat-form-field>
+          <input matInput placeholder="Department name" formControlName="name">
+              </mat-form-field>
+      
+              <label><strong>Description</strong> </label>
+              <mat-form-field>
+          <input matInput placeholder="Description" formControlName="description">
+          </mat-form-field>
+      
+       
+      
+        <div class="button-row">
+          <a  class="button-green" (click)="save()">Save</a>
+          <a class="button-red" (click)="cancel()">Cancel</a>
+        </div>
+      </form>
+    </div>

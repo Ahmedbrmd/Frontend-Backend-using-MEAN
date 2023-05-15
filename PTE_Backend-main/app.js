@@ -19,6 +19,7 @@ const careerRoute = require("./src/routes/career");
 const roomRoute = require("./src/routes/material_resources/room");
 const vehicleRoute = require("./src/routes/material_resources/vehicle");
 const virtualizationEnvRoute = require("./src/routes/material_resources/virtualization_env");
+const department = require("./src/routes/department");
 
 
 //========== configuration ============
@@ -67,6 +68,6 @@ app.use("/api/material/room", roomRoute);
 app.use("/api/material/vehicle", vehicleRoute);
 app.use("/api/material/virtualization", virtualizationEnvRoute);
 app.use("/api/career", careerRoute);
-
+app.use("/api/departments", department)
 // ======== exporting app ========
 module.exports = app;

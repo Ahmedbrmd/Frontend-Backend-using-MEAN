@@ -16,10 +16,22 @@ router.delete(
   checkAdminMiddleware,
   roomCtr.deleteRoom
 );
+router.patch(
+  "/update/:id",
+  
+  authMiddleware,checkAdminMiddleware,
+  roomCtr.UpdateRoom
+);
 /**Events Managment ********/
 router.get("/events", authMiddleware, roomCtr.getRoomEvents);
+router.get("/getAll", authMiddleware, roomCtr.getAllRoomEvents);
 router.post("/setevent", authMiddleware, roomCtr.createEvent);
 router.patch("/acceptEvent/:id", authMiddleware, roomCtr.updateEvent);
 router.delete("/deleteEvent/:id", authMiddleware, roomCtr.deleteEvent);
-
+router.patch(
+  "/updateRoomEvent/:id",
+  
+  authMiddleware,
+  roomCtr.updateRoomEvent
+);
 module.exports = router;

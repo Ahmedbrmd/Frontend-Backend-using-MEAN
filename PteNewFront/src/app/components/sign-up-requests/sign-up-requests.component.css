@@ -1,0 +1,66 @@
+.main-content{
+    margin-top: 110px;
+    width: 780px;
+    margin-left : 360px;
+    box-shadow: 0px 1px 14px rgb(183 175 175);
+    padding: 20px;
+    border-radius: 5px;
+}
+.mat-raised-button{
+    margin: 2px;
+    width : 80px;
+    text-align: center;
+    
+}
+th{
+    color: black;
+    font-size: larger;
+    font-weight: bolder;
+    
+}
+img{
+    width : 54px;
+    height: 54px;
+    border-radius: 50%;
+    margin: 10px;
+
+
+}
+.material-icons {
+   margin-left: 14px;
+    border-radius: 50%;
+}
+.material-icons:hover{
+    cursor: pointer;
+
+}
+
+.table > tbody > tr > td{
+    padding: 25px 8px;
+    vertical-align: middle;
+    width: 703px;
+}
+.table thead th {
+    font-weight: bold;
+    color: black;
+    border-bottom: 0.2px solid #dfdcdc;
+}
+.card-title{
+    color: aliceblue;
+    
+    margin-top: -52px;;
+    
+    
+}
+.card-header-danger{
+    border-radius: 5px;
+    height: 50px;
+    margin-top: -52px;;
+}
+.table-responsive{
+    box-shadow: 1px;
+}
+
+h4{
+    padding: 12px;
+}

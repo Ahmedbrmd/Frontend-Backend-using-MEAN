@@ -1,0 +1,63 @@
+<app-sidebar></app-sidebar>
+<app-navbar></app-navbar>
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">Vehicles</h4>
+            </div>
+            <div class="card-body">
+              <div class="search-bar">
+              <mat-form-field>
+                <mat-label></mat-label>
+                
+                <input matInput (ngModelChange)="searchVehicle(key.value)"
+                 #key="ngModel" ngModel name="key" id="searchName"
+                  type="text" placeholder="Enter search text">
+                  <mat-icon matSuffix style="margin-bottom: 8px;" >search</mat-icon>
+              </mat-form-field>
+            </div>
+              <div class="vehicle-container">
+                <div class="vehicle-box" *ngFor="let vehicle of vehicles" [class.selected]="vehicle._id === selectedVehicleId" (click)="onVehicleClick(vehicle._id)">
+                  <div class="car-items">
+                  <div class="car-icon"><mat-icon matSuffix >garage</mat-icon></div>
+                  <div class="vehicle-model">Model: {{ vehicle.model }}</div>
+                  <div class="vehicle-registration">Registration number: {{ vehicle.registration_number }}</div>
+                  <div class="vehicle-type">Type: {{ vehicle.type }}</div>
+                  </div>
+                  <div class="manage-icon" *ngIf="checkAdmin()">
+                  <a (click)="deleteVehicle(vehicle._id)"> <mat-icon matSuffix color="red">delete</mat-icon></a> 
+                  <a><mat-icon matSuffix (click)="openupdateForm(vehicle._id)">edit</mat-icon></a>
+                </div>
+                </div>
+              </div>
+              <div class="add-boutton" *ngIf="checkAdmin()">
+                <div class="button"><a  (click)="openAddForm()">Add vehicle</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="calendarcontainer" *ngIf="showCalendar">
+    <div class="key-definition">
+      <div class="key-item">
+        <div class="event-color-blue"><mat-icon matSuffix color="blue" >radio_button_unchecked</mat-icon></div>
+        <div class="event-label">Your Accepted Events</div>
+      </div>
+      <div class="key-item">
+        <div class="event-color-green"><mat-icon matSuffix color="green">check_box_outline_blank</mat-icon></div>
+        <div class="event-label">Other Users Accepted Events</div>
+      </div>
+      <div class="key-item">
+        <div class="event-color-orange"><mat-icon matSuffix color="orange">check_box_outline_blank</mat-icon></div>
+        <div class="event-label">Pending Events</div>
+      </div>
+    </div>
+    <full-calendar #calendar [options]="calendarOptions" ></full-calendar>
+  </div>
+  

@@ -1,0 +1,56 @@
+<div class="main-content">
+  <form [formGroup]="eventform">
+
+    <mat-form-field class="form-field">
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="title" formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Start</mat-label>
+      <input matInput [matDatepicker]="startPicker" formControlName="start" required #start>
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="form-field">
+      <input type="time" class="form-input" formControlName="starttime" required>
+    </div>
+
+    <mat-form-field class="form-field">
+      <mat-label>End</mat-label>
+      <input matInput [matDatepicker]="endPicker" formControlName="end" required #end>
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="form-field">
+      <input type="time" class="form-input" formControlName="endtime" required>
+    </div>
+
+    <mat-form-field class="form-field">
+      <mat-label>Driver</mat-label>
+      <mat-select formControlName="driver">
+        <mat-option *ngFor="let driver of drivers" [value]="driver">{{ driver.firstName }} {{ driver.lastName }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Destination</mat-label>
+      <input matInput placeholder="destination" formControlName="destination">
+    </mat-form-field>
+
+    
+    
+   
+    
+    
+    
+
+    <div class="button-row">
+      <div class="button-green"><a (click)="save()">Save</a></div>
+      <div class="button-red"><a (click)="cancel()">Cancel</a></div>
+    </div>
+
+  </form>
+</div>

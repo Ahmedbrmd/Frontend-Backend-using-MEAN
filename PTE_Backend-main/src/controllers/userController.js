@@ -15,6 +15,7 @@ const UserEvent = require("../models/technical_team/userEvent");
 const nodemailer = require("nodemailer");
 const moment = require("moment");
 const UserPlan = require("../models/technical_team/userPlan");
+const Department = require('../models/department');
 
 function setUserTitle(experience) {
   /* Check experience years and set a title for the Employee*/
@@ -77,6 +78,7 @@ if (req.file){
     body.password = hashedPassword;
     body.roles = [Roles.Engineer];
     body.title = setUserTitle(body.experience);
+    
 
     const user = await User.create({ ...body });
     const cv = await Cv.create({ user: user._id });
@@ -92,7 +94,7 @@ if (req.file){
       if (_user && cv && plan) {
         res.status(200).json({
           message:
-            "Signup request sent succefully , waiting for admin confirmation",
+            "Signup request sent successfully , waiting for admin confirmation",
           user: _user,
         });
       }
@@ -107,7 +109,7 @@ if (req.file){
       if (_user && cv && career && plan) {
         res.status(200).json({
           message:
-            "Signup request sent succefully , waiting for admin confirmation",
+            "Signup request sent successfully , waiting for admin confirmation",
           user: _user,
         });
       }
@@ -147,7 +149,7 @@ module.exports.login = async function (req, res, next) {
     return res.status(200).json({
       token: token,
       expiresIn: 6000,
-      userName: fetchedUser.fullName,
+      userName: fetchedUser.firstName,
       image: fetchedUser.image,
       _id: fetchedUser._id,
       roles: fetchedUser.roles,
@@ -317,7 +319,24 @@ module.exports.changePswd = async function (req, res) {
     body.password = await bcrypt.hash(body.password, 10);
     await User.findOneAndUpdate({ email: body.email }, { $set: body });
     await ForgetPassword.findByIdAndDelete(ID);
-    res.status(200).json("password updated");
+
+    // Send email to user about password change
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      port: 587,
+      auth: {
+        user: "prologic.simop@gmail.com",
+        pass: "mepdngigwccwxwog",
+      },
+    });
+    transporter.sendMail({
+      from: "prologic.simop@gmail.com",
+      to: body.email,
+      subject: "Password Changed Successfully",
+      text: "Your password has been successfully changed.",
+    });
+
+    res.status(200).json("Password updated");
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -331,41 +350,46 @@ module.exports.confirmSignUp = async function (req, res) {
   }
 
   const user =await  User.findByIdAndUpdate(ID, { isEnabled: true });
-  // if (user) {
-  //   const transporter = nodemailer.createTransport({
-  //     service: "gmail",
-  //     port: 587,
-  //     auth: {
-  //       user: "prologic.simop@gmail.com",
-  //       pass: "mepdngigwccwxwog",
-  //     },
-  //   });
-  //   transporter.sendMail({
-  //     from: "prologic.simop@gmail.com",
-  //     to: user.email,
-  //     subject: "Prologic -- register request accepted",
-  //     text: "Your register request is accepted",
-  //   });
-  // }
+  if (user) {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      port: 587,
+      auth: {
+        user: "prologic.simop@gmail.com",
+        pass: "mepdngigwccwxwog",
+      },
+    });
+    transporter.sendMail({
+      from: "prologic.simop@gmail.com",
+      to: user.email,
+      subject: "Prologic -- register request accepted",
+      text: "Your register request is accepted",
+    });
+  }
 
   return res.status(200).json({ message: "User accepted" });
 };
 
+
+
 module.exports.getAllUsers = async function (req, res) {
-  User.find({
-    $and: [
-      { isEnabled: true },
-      { _id: { $ne: req.user._id } },
-      { roles: { $ne: "admin" } },
-    ],
-  })
-    .select("-password")
-    .populate("cv", "skills")
-    .then((users) => {
-      res.status(200).json(users);
+  try {
+    const users = await User.find({
+      $and: [
+        { isEnabled: true },
+        { roles: { $ne: "admin" } },
+      ],
     })
-    .catch((error) => res.status(404).json({ message: error }));
+      .select("-password")
+      .populate("cv", "skills")
+      
+
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
 };
+
 
 module.exports.getSignUpRequests = async function (req, res) {
   User.find({ isEnabled: false })
@@ -425,13 +449,13 @@ module.exports.getUserById = async function (req, res) {
 };
 
 module.exports.filterUsers = async function (req, res) {
-  var fullNameFilter = req.body.fullName;
+  var firstNameFilter = req.body.firstName;
   var titleFilter = req.body.title;
   var driversFilter = req.body.drivingLicense;
   var departmentFilter = req.body.department;
   var pathsFilter = req.body.paths;
-  if (fullNameFilter) {
-    fullNameFilter = fullNameFilter.trim().length === 0 ? null : fullNameFilter;
+  if (firstNameFilter) {
+    firstNameFilter = firstNameFilter.trim().length === 0 ? null : firstNameFilter;
   }
   if (titleFilter) {
     titleFilter = titleFilter.trim().length === 0 ? null : titleFilter;
@@ -449,16 +473,18 @@ module.exports.filterUsers = async function (req, res) {
 
   try {
     if (driversFilter) {
-      const users = await User.find({
+      const driversWithoutEvents = await User.find({
         roles: { $ne: "admin" },
         drivingLicense: true,
         isEnabled: true,
+        
       })
         .populate("cv")
         .populate("career")
         .select(pathsFilter);
-      if (users) {
-        res.status(200).json(users);
+
+      if (driversWithoutEvents) {
+        res.status(200).json(driversWithoutEvents);
       }
     } else {
       const users = await User.find({
@@ -469,8 +495,8 @@ module.exports.filterUsers = async function (req, res) {
           {
             $or: [
               {
-                fullName: fullNameFilter
-                  ? new RegExp(fullNameFilter, "i")
+                firstName: firstNameFilter
+                  ? new RegExp(firstNameFilter, "i")
                   : new RegExp("[a-zA-Z]"),
               },
               {
@@ -490,6 +516,7 @@ module.exports.filterUsers = async function (req, res) {
         .populate("cv")
         .populate("career")
         .select(pathsFilter);
+
       if (users) {
         res.status(200).json(users);
       }
@@ -499,15 +526,20 @@ module.exports.filterUsers = async function (req, res) {
   }
 };
 
+
 module.exports.searchUsers = async function (req, res) {
-  var fullNameFilter = req.body.fullName;
+  var firstNameFilter = req.body.firstName;
+  var lastNameFilter = req.body.lastName;
   var addressFilter = req.body.address;
   var titleFilter = req.body.title;
   var departmentFilter = req.body.department;
   var isNotEnabledFilter = req.body.isEnabled;
   var pathsFilter = req.body.paths;
-  if (fullNameFilter) {
-    fullNameFilter = fullNameFilter.trim().length === 0 ? null : fullNameFilter;
+  if (firstNameFilter) {
+    firstNameFilter = firstNameFilter.trim().length === 0 ? null : firstNameFilter;
+  }
+  if (lastNameFilter) {
+    lastNameFilter = lastNameFilter.trim().length === 0 ? null : lastNameFilter;
   }
   if (titleFilter) {
     titleFilter = titleFilter.trim().length === 0 ? null : titleFilter;
@@ -533,8 +565,12 @@ module.exports.searchUsers = async function (req, res) {
       roles: { $ne: "admin" },
       isEnabled: isNotEnabledFilter ? false : true,
       _id: { $ne: res.locals.user._id },
-      fullName: fullNameFilter
-        ? new RegExp(fullNameFilter, "i")
+      firstName: firstNameFilter
+        ? new RegExp(firstNameFilter, "i")
+        : new RegExp("[a-zA-Z]"),
+
+        lastName: lastNameFilter
+        ? new RegExp(lastNameFilter, "i")
         : new RegExp("[a-zA-Z]"),
 
          title: titleFilter

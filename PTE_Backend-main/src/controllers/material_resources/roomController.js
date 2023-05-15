@@ -5,7 +5,9 @@ const RoomEvent = require("../../models/material_resources/events/roomEvent");
 /** Add Room */
 module.exports.addRoom = async function (req, res, next) {
   try {
-    const body = { label: req.body.label, location: req.body.location };
+    const body = {capacity: req.body.capacity,
+       label: req.body.label,
+        location: req.body.location };
     const room = await Room.create({ ...body });
     if (room) {
       res.status(200).json(room);
@@ -38,6 +40,9 @@ module.exports.searchRoom = async function (req, res) {
     const rooms = await Room.find({
       $or: [
         {
+          capacity: new RegExp(req.query.text, "i"),
+        },
+        {
           label: new RegExp(req.query.text, "i"),
         },
         {
@@ -50,6 +55,37 @@ module.exports.searchRoom = async function (req, res) {
     res.status(404).json(error);
   }
 };
+module.exports.UpdateRoom = async function(req, res, next) {
+  const ID = req.params.id;
+
+  if (!ObjectId.isValid(ID)) {
+    return res.status(404).json('ID is not valid');
+  }
+  
+  
+
+  try {
+    const updatedRoom = await Room.findByIdAndUpdate(
+      ID,
+      {
+        capacity: req.body.capacity,
+        label: req.body.label,
+        location: req.body.location,
+      },
+      { new: true } // return the updated document
+    );
+
+    if (!updatedRoom) {
+      return res.status(404).json('Room not found');
+    }
+
+    return res.json(updatedRoom);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json('Server error');
+  }
+};
+
 
 /*******************************************************/
 /***Events managment */
@@ -57,11 +93,30 @@ module.exports.searchRoom = async function (req, res) {
 module.exports.createEvent = async function (req, res) {
   try {
     const eventExist = await RoomEvent.find({
-      start: { $gte: req.body.start },
-      end: { $lte: req.body.end },
+      $or: [
+        {
+          $and: [
+            { start: { $lte: req.body.start } },
+            { end: { $gte: req.body.start } },
+          ],
+        },
+        {
+          $and: [
+            { start: { $lte: req.body.end } },
+            { end: { $gte: req.body.end } },
+          ],
+        },
+        {
+          $and: [
+            { start: { $gte: req.body.start } },
+            { end: { $lte: req.body.end } },
+          ],
+        },
+      ],
       room: req.body.room,
       isAccepted: true,
     });
+    
 
     // if dates are  already reserved
     if (eventExist.length > 0) {
@@ -87,6 +142,8 @@ module.exports.createEvent = async function (req, res) {
     res.status(500).json(error);
   }
 };
+/* update Event*/
+
 
 /** get events by room ID*/
 module.exports.getRoomEvents = async function (req, res) {
@@ -101,7 +158,7 @@ module.exports.getRoomEvents = async function (req, res) {
         room: ID,
         start: { $gte: req.query.start },
         end: { $lte: req.query.end },
-      }).populate({ path: "applicant", select: "fullName image" });
+      }).populate({ path: "applicant", select: "firstName lastName image _id" });
 
       if (events) {
         res.status(200).json(events);
@@ -127,7 +184,7 @@ module.exports.getRoomEvents = async function (req, res) {
             ],
           },
         ],
-      }).populate({ path: "applicant", select: "fullName image" });
+      }).populate({ path: "applicant", select: "firstName lastName image _id" });
 
       if (events) {
         res.status(200).json(events);
@@ -150,9 +207,27 @@ module.exports.updateEvent = async function (req, res) {
 
       //check if there is a conflict (to assure that there  is no conflicts)
       const checkExist = await RoomEvent.find({
-        start: { $gte: event.start },
-        end: { $lte: event.end },
-        room: event.room,
+        $or: [
+          {
+            $and: [
+              { start: { $lte: req.body.start } },
+              { end: { $gte: req.body.start } },
+            ],
+          },
+          {
+            $and: [
+              { start: { $lte: req.body.end } },
+              { end: { $gte: req.body.end } },
+            ],
+          },
+          {
+            $and: [
+              { start: { $gte: req.body.start } },
+              { end: { $lte: req.body.end } },
+            ],
+          },
+        ],
+        room: req.body.room,
         isAccepted: true,
       });
 
@@ -166,9 +241,8 @@ module.exports.updateEvent = async function (req, res) {
 
       // delete non-confirmed events that are in conflict with the accepted event
       await RoomEvent.deleteMany({
-        room: event.room,
         start: { $gte: event.start },
-        end: { $gte: event.end },
+        end: { $lte: event.end },
         isAccepted: false,
       });
 
@@ -190,5 +264,94 @@ module.exports.deleteEvent = async function (req, res) {
     res.status(200).json(event);
   } catch (error) {
     res.status(404).json(error);
+  }
+};
+
+/* Update room event*/
+module.exports.updateRoomEvent = async function (req, res , next) {
+  const body = { ...req.body };
+  const ID = req.params.id;
+
+  if (!ObjectId.isValid(ID)) {
+    return res.status(404).json("ID is not valid");
+  }
+
+  try {
+    const eventExist = await RoomEvent.find({
+      $or: [
+        {
+          $and: [
+            { start: { $lte: body.start } },
+            { end: { $gte: body.start } },
+          ],
+        },
+        {
+          $and: [
+            { start: { $lte: body.end } },
+            { end: { $gte: body.end } },
+          ],
+        },
+        {
+          $and: [
+            { start: { $gte: body.start } },
+            { end: { $lte: body.end } },
+          ],
+        },
+      ],
+      room: body.room,
+      isAccepted: true,
+      _id: { $ne: ID },
+    });
+
+    // if dates are already reserved
+    if (eventExist.length > 0) {
+      return res.status(500).json("Dates already reserved");
+    }
+
+    // Update event
+    const updatedEvent = await RoomEvent.findByIdAndUpdate(ID, { $set: body }, { new: true })
+      .populate("room")
+      .populate("applicant");
+
+    if (updatedEvent) {
+      return res.status(200).json(updatedEvent);
+    } else {
+      return res.status(404).json("Event not found");
+    }
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+
+/* get all events*/
+module.exports.getAllRoomEvents = async function (req, res) {
+  try {
+    // if connected user is admin
+    if (res.locals.user.roles.includes("admin")) {
+      const events = await RoomEvent.find().populate({
+        path: "applicant",
+        select: "firstName lastName image _id",
+      });
+
+      res.status(200).json(events); // Send all the events directly
+    } else {
+      // connected user is not admin => cannot display unconfirmed events of other users
+      const events = await RoomEvent.find({
+        $or: [
+          {
+            $and: [
+              { isAccepted: false },
+              { applicant: res.locals.user._id },
+            ],
+          },
+          { isAccepted: true },
+        ],
+      }).populate({ path: "applicant", select: "firstName lastName image _id" });
+
+      res.status(200).json(events); // Send the filtered events directly
+    }
+  } catch (error) {
+    res.status(500).json({ error: "There was an error" });
   }
 };

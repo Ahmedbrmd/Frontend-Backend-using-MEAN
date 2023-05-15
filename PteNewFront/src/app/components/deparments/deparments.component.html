@@ -1,0 +1,48 @@
+<app-sidebar></app-sidebar>
+<app-navbar></app-navbar>
+<div class="main-content">
+    <div class="container-fluid">
+        
+            
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Departments</h4>
+                    </div>
+                    <div class="card-body">
+                        
+                           
+                            <div class="vehicle-container">
+                                <div class="vehicle-box" *ngFor="let dep of deps" >
+                                  <div class="room-items">
+                                    <table>
+                                      <tr>
+                                       <td><mat-icon matSuffix>apartment</mat-icon></td>
+                                       <div class="vehicle-registration">    <td>{{dep.name}}</td></div>
+                                      </tr>
+                                      <tr>
+                                        <td><mat-icon matSuffix>description</mat-icon></td>
+                                        <div class="vehicle-model">  <td>{{ dep.description }}</td></div>
+                                      </tr>
+                                      
+                                    </table>
+                  
+                                    <div  class="button-row">
+                                      <a (click)="deleteRoom(dep._id)"><mat-icon matSuffix color="red">delete</mat-icon></a>
+                                      <a (click)="openupdateForm(dep._id)"><mat-icon matSuffix>edit</mat-icon></a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+
+                              
+                                <div class="button"><a (click)="openMiniForm()">Add department</a></div>
+                              
+
+
+
+                        
+                    </div>
+                </div>
+            </div>
+            </div>

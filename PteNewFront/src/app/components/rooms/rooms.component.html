@@ -1,0 +1,77 @@
+<app-sidebar></app-sidebar>
+<app-navbar></app-navbar>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Rooms</h4>
+          </div>
+          <div class="card-body">
+
+            <div class="search-bar">
+              <mat-form-field>
+                <mat-label></mat-label>
+                <input matInput (ngModelChange)="searchRoom(key.value)"
+                  #key="ngModel" ngModel name="key" id="searchName"
+                  type="text" placeholder="Enter search text">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <div class="vehicle-container">
+              <div class="vehicle-box" *ngFor="let room of rooms" [class.selected]="room._id === selectedRoomId" (click)="onRoomClick(room._id)">
+                <div class="room-items">
+                  <table>
+                    <tr>
+                     <td><mat-icon matSuffix>meeting_room</mat-icon></td>
+                     <div class="vehicle-registration">    <td>{{room.label}}</td></div>
+                    </tr>
+                    <tr>
+                      <td><mat-icon matSuffix>event_seat</mat-icon></td>
+                      <div class="vehicle-model">  <td>{{ room.capacity }}</td></div>
+                    </tr>
+                    <tr>
+                      <td><mat-icon matSuffix>pin_drop</mat-icon></td>
+                    <div class="vehicle-type">  <td>{{ room.location }}</td></div>
+                    </tr>
+                  </table>
+
+                  <div *ngIf="checkAdmin()" class="button-row">
+                    <a (click)="deleteRoom(room._id)"><mat-icon matSuffix color="red">delete</mat-icon></a>
+                    <a (click)="openupdateForm(room._id)"><mat-icon matSuffix>edit</mat-icon></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+            <div class="add-button" *ngIf="checkAdmin()">
+              <div class="button"><a (click)="openMiniForm()">Add room</a></div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="calendarcontainer" *ngIf="showCalendar">
+  <div class="key-definition">
+    <div class="key-item">
+      <div class="event-color-blue"><mat-icon matSuffix color="blue" >radio_button_unchecked</mat-icon></div>
+      <div class="event-label">Your Accepted Events</div>
+    </div>
+    <div class="key-item">
+      <div class="event-color-green"><mat-icon matSuffix color="green">check_box_outline_blank</mat-icon></div>
+      <div class="event-label">Other Users Accepted Events</div>
+    </div>
+    <div class="key-item">
+      <div class="event-color-orange"><mat-icon matSuffix color="orange">check_box_outline_blank</mat-icon></div>
+      <div class="event-label">Pending Events</div>
+    </div>
+  </div>
+  <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+</div>

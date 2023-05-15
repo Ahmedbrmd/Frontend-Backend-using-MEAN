@@ -1,0 +1,41 @@
+<app-sidebar></app-sidebar>
+<app-navbar></app-navbar>
+<div class="profile">
+  <img [src]="img" alt="Profile Image" class="profile-image">
+    <div class="profile-right">
+  <div class="profile-header">
+      
+    </div>
+    <div class="profile-body">
+      <h2 class="profile-name"> {{firstName}} {{lastName}}</h2>
+      
+      <p class="profile-description">{{ DateOfBirth | date:'MMM d, y'}}</p>
+      <ul class="profile-details">
+        <li><mat-icon matSuffix>call</mat-icon>{{phone}} <mat-icon matSuffix>home</mat-icon>{{address}}</li>
+        
+        <li><mat-icon matSuffix>public</mat-icon>{{nationality}}</li>
+        <li><mat-icon matSuffix>mail</mat-icon>{{email}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="profile-left">
+
+    <div class="profile-body">
+      <h2 class="profile-dep"><mat-icon matSuffix>apartment</mat-icon> <strong>Department </strong>{{ department }} </h2>
+      
+      <ul class="profile-info">
+        <li><mat-icon matSuffix>badge</mat-icon> <strong>Title </strong>{{title}} </li>
+        
+        <li><mat-icon matSuffix>event</mat-icon> <strong>Hiring date </strong> {{hiringDate | date:'MMM d, y'}}</li>
+        <li><mat-icon matSuffix>star</mat-icon><strong>Experience</strong> {{experience}}</li>
+      </ul>
+    </div>
+
+
+
+  </div>
+  <div class="buttons">
+  <a class="button" (click)="openupdateForm()">Update profile</a>
+  <a class="button" (click)="openChangePw()">Change Password</a></div>
+  </div>
+  

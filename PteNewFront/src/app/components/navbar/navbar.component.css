@@ -1,0 +1,82 @@
+.navbar{
+    
+    position: fixed;
+    top: 3px;
+    left: 1804px;
+    bottom: 0;
+    z-index: 1030;
+    display: inline;
+    flex-direction: column;
+    
+  
+}
+.button {
+    background-color: #0f3ac5;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    
+  }
+  
+  .button:hover {
+    background-color: #072689;
+  }
+  
+  .button:active {
+    background-color: #0f3ac5;
+  }
+
+  .profile-image {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+  /* Custom styles for the dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 120px;
+  padding: 0.5rem 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+.user-name{
+  margin-bottom: 20px;
+  margin-left: 10px;
+  font-size: 18px;
+}

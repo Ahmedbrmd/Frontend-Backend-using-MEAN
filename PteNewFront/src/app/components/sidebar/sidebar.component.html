@@ -1,0 +1,50 @@
+<div class="sidebar">
+    <div class="logo">
+      <a href="#" class="simple-text">
+        <div class="logo-img">
+          <img src="/assets/img/logo-PROLOGIC.png"/>
+        </div>
+      </a>
+    </div>
+    <div class="sidebar-wrapper">
+      
+        
+        
+      </div>
+      <ul class="nav" routerLinkActive="active">
+        
+        <div class="dropdown">
+          <li>
+            <a class="nav-link" (click)="toggleDropdown()">
+              <i class="material-icons">sort</i>
+              <p>Resources</p>
+            </a>
+          </li>
+          <div class="dropdown-content" id="myDropdown" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="'/vehicles'" >
+              <i class="material-icons">directions_car</i>
+              <p>Vehicles</p>
+            </a>
+            <a class="nav-link" [routerLink]="'/rooms'" >
+              <i class="material-icons">meeting_room</i>
+              <p>Rooms</p>
+            </a>
+          </div>
+        
+        
+        
+        
+
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+          
+          
+          <a class="nav-link" [routerLink]="[menuItem.path]">
+            <i class="material-icons">{{menuItem.icon}}</i>
+            <p>{{menuItem.title}}</p>
+          </a>
+        </li>
+      </div>
+      </ul>
+    </div>
+  
+  

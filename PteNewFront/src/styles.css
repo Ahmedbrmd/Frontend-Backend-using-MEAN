@@ -1,1 +1,141 @@
-/* You can add global styles to this file, and also import other style files */
+.mat-black {
+  background-color: rgb(19, 18, 18);
+  color: #fff;
+}
+
+.mat-red {
+  background-color: rgb(187, 63, 63);
+  color: #fff;
+}
+
+.mat-green {
+  background-color: rgb(49, 177, 79);
+  color: #fff;
+}
+
+.mat-blue {
+  background-color: rgb(15, 58, 197);
+  color: #fff;
+}
+
+.sidebar[data-color=danger] li.active>a {
+  background-color: #0f3ac5;
+  box-shadow: 0 4px 20px 0px rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(42 61 197 / 40%);
+}
+
+.card .card-header-danger .card-icon,
+.card .card-header-danger .card-text,
+.card .card-header-danger:not(.card-header-icon):not(.card-header-text),
+.card.bg-danger,
+.card.card-rotate.bg-danger .front,
+.card.card-rotate.bg-danger .back {
+  background: #0f3ac5;
+}
+
+.sidebar .logo {
+  padding: 38px 0px;
+  margin: 0;
+  display: block;
+  position: relative;
+  z-index: 4;
+}
+
+.sidebar .logo-img img {
+  width: 150px;
+  top: -14px;
+  position: absolute;
+  left: 56px;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: #0f3ac5;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #0f3ac5;
+}
+
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: #0f3ac5;
+}
+
+
+.nav-link {
+
+  display: inline-block;
+  margin: 17px;
+  vertical-align: middle;
+
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.button {
+  background-color: #0f3ac5;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+
+.button:hover {
+  background-color: #072689;
+}
+
+.button:active {
+  background-color: #0f3ac5;
+}
+
+.button-green {
+  background-color: rgb(49, 177, 79);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+
+.button-green:hover {
+  background-color: rgb(49, 177, 79);
+}
+
+.button-green:active {
+  background-color: rgb(49, 177, 79);
+}
+
+.button-red {
+  background-color: rgb(187, 63, 63);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+
+.button-red:hover {
+  background-color: rgb(187, 63, 63);
+}
+
+.button-red:active {
+  background-color: rgb(187, 63, 63);
+}

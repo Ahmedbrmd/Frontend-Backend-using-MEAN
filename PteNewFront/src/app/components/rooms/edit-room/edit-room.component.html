@@ -1,0 +1,28 @@
+<div class="main-content">
+<form [formGroup]="form">
+    
+  
+    <mat-form-field>
+      <input matInput placeholder="Label" formControlName="label">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Capacity" formControlName="capacity">
+        <mat-error *ngIf="form.get('capacity').hasError('Enter a valid capacity number')" style="color: red;">Please enter a valid capacity number</mat-error>
+  
+      </mat-form-field>
+
+
+  
+    <mat-form-field>
+      <input matInput placeholder="Location" formControlName="location">
+      
+
+    </mat-form-field>
+  
+    <div class="button-row">
+      <a class="button-green" (click)="updateRoom(form)">Save</a>
+      <a class="button-red" (click)="cancel()">Cancel</a>
+    </div>
+  </form>
+  </div>

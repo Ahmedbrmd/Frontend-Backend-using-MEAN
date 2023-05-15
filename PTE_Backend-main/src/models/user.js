@@ -23,7 +23,7 @@ const UserSchema = mongoose.Schema({
   familySituation: { type: String},
   DateOfBirth: { type: Date},
   address: { type: String},
-  department: { type: String},
+  department: { type: mongoose.Schema.Types.ObjectId, ref: "Department"},
   drivingLicense: { type: Boolean },
   gender: { type: String },
   isEnabled: { type: Boolean, default: false },

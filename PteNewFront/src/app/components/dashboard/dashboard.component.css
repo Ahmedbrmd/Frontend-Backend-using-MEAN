@@ -1,0 +1,77 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 150px;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+
+.all-events {
+  background-color: #F44336;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  
+}
+.all-events mat-icon{
+  margin-top: 50px;
+}
+
+.dashboard-item {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.vehicle {
+  background-color: #FFC107;
+  height: 227px;
+  cursor: pointer;
+}
+
+.room {
+  background-color: #2196F3;
+  height: 227px;
+  cursor: pointer;
+}
+
+.user {
+  background-color: #4CAF50;
+  height: 227px;
+  cursor: pointer;
+}
+
+.requests {
+  background-color: #FF5722;
+  height: 227px;
+  cursor: pointer;
+}
+.requests mat-icon{
+  margin-top: 50px;
+}
+
+.dashboard-item-content {
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+p {
+  font-size: 18px;
+  margin: 10px 0;
+}

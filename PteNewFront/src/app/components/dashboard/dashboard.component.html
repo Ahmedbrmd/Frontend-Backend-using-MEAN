@@ -1,0 +1,71 @@
+<app-sidebar></app-sidebar>
+<app-navbar></app-navbar>
+
+<div class="container">
+  <div class="dashboard">
+    <div class="all-events">
+
+      <mat-icon matSuffix>event</mat-icon>
+      <h1>Total Events</h1>
+      <p>{{ AllEvents }}</p>
+    </div>
+
+    <div class="dashboard-item vehicle" routerLink="/vehicles">
+      <div class="dashboard-item-content">
+        <mat-icon matSuffix>directions_car</mat-icon>
+        <h1>Total Vehicle Events</h1>
+        <p>{{ totalVehicleEvents }}</p>
+        <h1>Pending Reservations</h1>
+        <p>{{ pendingVehicleEventsCount }}</p>  
+      </div>
+    </div>
+    <div class="dashboard-item room" routerLink="/rooms">
+      <div class="dashboard-item-content">
+        <mat-icon matSuffix>meeting_room</mat-icon>
+        <h1>Total Room Events</h1>
+        <p>{{ totalRoomEvents }}</p>
+        <h1>Pending Reservations</h1>
+        <p>{{ pendingRoomEventsCount }}</p>
+      </div>
+    </div>
+    <div class="dashboard-item user" routerLink="/users">
+      <div class="dashboard-item-content">
+        <mat-icon matSuffix>supervisor_account</mat-icon>
+        <h1>Total User Events</h1>
+        <p>{{ totalUserEvents }}</p>
+        <h1>Pending Reservations</h1>
+        <p>{{ pendingUserEventsCount }}</p>
+      </div>
+    </div>
+
+    <ngx-charts-bar-vertical
+    [view]="[400, 300]"
+    [scheme]="colorScheme"
+    [results]="[
+      { name: 'Vehicles', value: totalVehicleEvents },
+      { name: 'Pending V', value: pendingVehicleEventsCount },
+      { name: 'Rooms', value: totalRoomEvents },
+      { name: 'Pending R', value: pendingRoomEventsCount },
+      { name: 'Users', value: totalUserEvents },
+      { name: 'Pending U', value: pendingUserEventsCount },
+    ]"
+    [xAxis]="true"
+    [yAxis]="true"
+    [legend]="true"
+    [showXAxisLabel]="false"
+    [showYAxisLabel]="false"
+    xAxisLabel="Events"
+    yAxisLabel="Count"
+  ></ngx-charts-bar-vertical>
+
+    <div class="dashboard-item requests" routerLink="/requests">
+      <div class="dashboard-item-content">
+        <mat-icon matSuffix>person_add</mat-icon>
+        <h1>Sign-up Requests</h1>
+        <p>{{ pendingUserRequestsCount }}</p>
+      </div>
+    </div>
+    
+  </div>
+  
+</div>

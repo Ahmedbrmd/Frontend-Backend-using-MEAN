@@ -1,0 +1,86 @@
+
+mat-form-field{
+    width: 100%;
+    margin-bottom: 2em;
+    margin-top: 2em;
+    
+}
+.mycontainer{
+  height: 670px;
+    width: 675px;
+}
+.center h1{
+  text-align: center;
+  font-size: 2.2em;
+  font-weight: 350;
+  margin-top: -66px;
+
+
+}
+.center form{
+  margin-top: 44px;
+  padding: 0 35px;
+  
+}
+form .txt_field{
+  position: relative;
+  border-bottom: 2px solid #adadad;
+  margin: 30px 0;
+}
+.txt_field input{
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+}
+.pass{
+  margin: -5px 0 20px 5px;
+  color: #a6a6a6;
+  cursor: pointer;
+}
+.pass:hover{
+  text-decoration: underline;
+}
+input[type="submit"]{
+  width: 100%;
+  height: 50px;
+  border: 1px solid;
+  background: #0f3ac5;
+  border-radius: 25px;
+  font-size: 18px;
+  color: #e9f4fb;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+input[type="submit"]:hover{
+  border-color: rgb(0, 0, 0);
+  border-width: 2px;
+  transition: .5s;
+}
+.signup_link{
+  margin: 30px 0;
+  text-align: center;
+  font-size: 16px;
+  color: #666666;
+}
+.signup_link a{
+  color: #2691d9;
+  text-decoration: none;
+}
+.signup_link a:hover{
+  text-decoration: underline;
+}
+.mat-checkbox{
+  margin-top: 10px;
+  padding: 2px;
+  
+}
+.mat-radio-button{
+  margin-left: 4px;
+  
+
+}

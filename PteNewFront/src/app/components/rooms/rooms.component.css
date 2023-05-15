@@ -1,0 +1,125 @@
+.main-content{
+  width: 250px;
+  margin-left : 300px;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 1px 14px rgb(183 175 175);
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 110px;
+}
+.mat-raised-button{
+  margin: 2px;
+  width : 80px;
+  text-align: center;
+  
+}
+.card-title{
+  color: aliceblue;
+  
+  margin-top: -52px;;
+  
+  
+}
+.card-header-danger{
+  border-radius: 5px;
+  height: 50px;
+  margin-top: -52px;;
+}
+h4{
+  padding: 12px;
+}
+.vehicle-container {
+  display: flex;
+flex-wrap: wrap;
+}
+
+.vehicle-box {
+  width: 250px;
+  height: 112px;
+  flex: 0 0 calc(50% - -77px);
+  margin-right: 20px;
+  margin-bottom: 30px;
+  margin-left: 15px;
+ 
+  background-color: #fff;
+  border: 1px solid rgb(56, 49, 49);
+  border-radius: 4px;
+  cursor: pointer;
+  
+  align-items: center;
+}
+
+.vehicle-box:hover {
+  box-shadow: 0px 0px 10px #ddd;
+}
+.vehicle-registration {
+  font-weight: bold;
+  font-size: 20px;
+  
+}
+
+.vehicle-model {
+  
+  font-size: 16px;
+  
+}
+
+.vehicle-type {
+  font-size: 16px;
+}
+
+.mat-icon{
+  border-radius: 50%;
+}
+.button-row{
+  margin-left: 146px;
+    margin-top: -51px;
+}
+.add-button{
+  text-align: center;
+}
+.calendarcontainer{
+  width: 1100px;
+  margin-left: 25px;
+  display: inline-block;
+  vertical-align: top;
+  
+}
+.vehicle-box.selected {
+  border-color: red; 
+}
+.key-definition{
+  margin-left: 196px;
+  margin-top: 45px;
+  margin-bottom: -46px;
+}
+.event-color-blue{
+margin-left: -35px;
+margin-bottom: -26px;
+}
+.event-color-green{
+  margin-left: -35px;
+  margin-bottom: -26px;
+  }
+  .event-color-orange{
+    margin-left: -35px;
+    margin-bottom: -26px;
+    }
+    .mat-orange{
+      background-color: #ffa500;
+      color: #ffa500;
+  }
+  .mat-blue{
+    background-color: #3788d8;
+    color: #3788d8;
+  }
+  .mat-green{
+    background-color: #008000;
+    color: #008000;
+  }
+  .key-item{
+    margin-top: 5px;
+  height: 22px;
+  }

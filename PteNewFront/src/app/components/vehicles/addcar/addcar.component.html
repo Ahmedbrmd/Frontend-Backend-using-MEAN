@@ -1,0 +1,29 @@
+<div class="main-content">
+<form [formGroup]="form">
+    <mat-form-field>
+      <input matInput placeholder="Model" formControlName="model">
+      <mat-error *ngIf="form.get('model').hasError('required')">Please enter a model</mat-error>
+
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Registration Number" formControlName="registration_number">
+      <mat-error *ngIf="form.get('registration_number').hasError('required')">Please enter the registration number</mat-error>
+      <mat-error *ngIf="form.get('registration_number').hasError('invalidRegistrationNumber')" style="color: red;">Please enter a valid registration number</mat-error>
+
+
+
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Type" formControlName="type">
+      <mat-error *ngIf="form.get('type').hasError('required')">Please enter the car's type</mat-error>
+
+    </mat-form-field>
+  
+    <div class="button-row">
+      <a class="button-green" (click)="save()">Save</a>
+      <a class="button-red" (click)="cancel()">Cancel</a>
+    </div>
+  </form>
+  </div>

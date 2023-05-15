@@ -26,10 +26,9 @@ const authMiddleware = asyncHandler(async (req, res, next) => {
     }
   }
 
-   if (!token) {
-     res.status(401);
-     throw new Error("Not authorized, no token");
-   }
-});
-
+  if (!token) {
+    res.status(401);
+    throw new Error("Not authorized, no token");
+  }})
+ 
 module.exports = { authMiddleware };

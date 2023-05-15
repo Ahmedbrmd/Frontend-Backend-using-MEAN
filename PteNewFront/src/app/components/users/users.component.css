@@ -1,0 +1,160 @@
+
+.main-content{
+    width: 314px;
+    margin-left : 300px;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 1px 14px rgb(183 175 175);
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 110px;
+  }
+
+.mat-raised-button{
+    margin-left: 2px;
+    width : 80px;
+    text-align: center;
+}
+th{
+    color: black;
+    font-size: larger;
+    font-weight: bolder;
+    
+}
+.mat-form-field{
+    width: 200;
+    border-radius: 5px;
+    
+}
+.mat-raised-button{
+    width: 150px;
+}
+.mat-orange{
+    background-color: #ffa500;
+    color: #ffa500;
+}
+.mat-blue{
+  background-color: #3788d8;
+  color: #3788d8;
+}
+.mat-green{
+  background-color: #008000;
+  color: #008000;
+}
+
+
+
+td a{
+ margin-left: 17px;
+}
+tbody tr:hover {
+    cursor: pointer;
+    color: red;
+  }
+
+  .card-header-danger{
+    border-radius: 5px;
+    height: 50px;
+    margin-top: -52px;;
+}
+h4{
+  color: #fff;
+  padding: 12px;
+}
+
+  .calendarcontainer{
+    width: 1000px;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: top;
+    
+  }
+  .vehicle-container {
+    display: block;
+  }
+  
+  .vehicle-box {
+    width: 308px;
+    height: 113px;
+    
+    margin-bottom: 30px;
+    padding: 5px;
+    background-color: #fff;
+    border: 1px solid rgb(56, 49, 49);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .vehicle-box:hover {
+    box-shadow: 0px 0px 10px #ddd;
+  }
+  
+
+  
+  .button-row{
+    margin-left: 35%;
+  }
+  
+  .add-boutton{
+    margin-left: 15%;
+  }
+  img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+   margin-left: 20px;
+    
+  }
+  .person-details {
+   font-size: large;
+   font-weight: bold;
+  }
+  
+  .mat-icon{
+    margin-top: 5px;
+    height: 22px;
+  }
+  tr td div {
+    margin-left: 10px;
+    font-size: large;
+  }
+  .search-bar{
+    margin-left: 35px;
+    margin-top: 10px;
+}
+  
+mat-icon{
+  border-radius: 50%;
+  
+  
+}
+.delete-icon{
+  margin-left: 279px;
+  margin-top: -48px;
+}
+.vehicle-box.selected {
+  border-color: red; 
+}
+
+.key-definition{
+  margin-left: 196px;
+  margin-top: 45px;
+  margin-bottom: -46px;
+}
+.event-color-blue{
+margin-left: -35px;
+margin-bottom: -26px;
+}
+.event-color-green{
+  margin-left: -35px;
+  margin-bottom: -26px;
+  }
+  .event-color-orange{
+    margin-left: -35px;
+    margin-bottom: -26px;
+    }
+    .key-item{
+      margin-top: 5px;
+      height: 22px;
+    }
