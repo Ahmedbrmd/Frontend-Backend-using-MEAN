@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { SuccessComponent } from '../success/success.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-change-password',
@@ -18,11 +20,12 @@ export class ChangepasswordComponent implements OnInit {
   constructor(private route: ActivatedRoute, 
               private http: HttpClient, 
               private router: Router,
-              private formBuilder: FormBuilder) {}
+              private formBuilder: FormBuilder,
+              public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.FormPw = this.formBuilder.group({
-      password: ['', [Validators.required,Validators.minLength(6),this.matchValues('rpassword')]],
+      password: ['', [Validators.required,Validators.minLength(6)]],
       rpassword:['',[Validators.required,this.matchValues('password')]]
     });
 
@@ -36,6 +39,7 @@ export class ChangepasswordComponent implements OnInit {
         },
         error => {
           console.log(error);
+          this.router.navigate(['/login']);
         }
       ); 
     });
@@ -60,11 +64,14 @@ export class ChangepasswordComponent implements OnInit {
       this.http.patch<any>(`http://localhost:3001/api/users/change-psw/${this.id}`, body).subscribe(
         response => console.log(response),
         error => console.log(error)
-      );
+      
+        );
 
-      this.router.navigate(['/login']);
+        const dialogRef = this.dialog.open(SuccessComponent, {
+          data: { message: 'Password changed successfully' },
+        });
     
-
+          this.router.navigate(['/login']);
 
     });}
   }

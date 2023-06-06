@@ -129,7 +129,7 @@ module.exports.login = async function (req, res, next) {
     }
 
     if (!fetchedUser.isEnabled) {
-      return res.status(500).json({
+      return res.status(502).json({
         message: "Unauthorised login. Waiting for register confirmation ",
       });
     }
@@ -325,8 +325,8 @@ module.exports.changePswd = async function (req, res) {
       service: "gmail",
       port: 587,
       auth: {
-        user: "prologic.simop@gmail.com",
-        pass: "mepdngigwccwxwog",
+        user: "prologic******mail.com",
+        pass: "********",
       },
     });
     transporter.sendMail({

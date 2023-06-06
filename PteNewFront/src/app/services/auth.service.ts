@@ -72,13 +72,19 @@ export class AuthService {
         } 
       },
       error => {
-        if (error.status === 500) {
+        if (error.status === 404) {
           console.error('An error occurred:', error);
           const dialogRef = this.dialog.open(ErrorDialogComponent, {
             data: { message: 'Invalid email or password' },
           });
         }
-      }
+        else if (error.status === 502){
+          const dialogRef = this.dialog.open(ErrorDialogComponent, {
+            data: { message: 'Not authorized , waiting for confirmation' },
+          });
+        }
+      },
+      
     );
     return this.token;
   }

@@ -60,7 +60,5 @@ router.get("/:id", userCtr.getUserById);
 
 
 
-// router.get("/getPlanById/:id", authMiddleware, userPlanCtr.getPlanById);
 
-// router.post("/upload",upload.single("pdf"), authMiddleware,userPlanCtr.uploadPlan);
 module.exports = router;

@@ -165,7 +165,7 @@ export class UsersComponent implements OnInit {
       if (result) {
     this.http.delete("http://localhost:3001/api/users/delete/"+userId).subscribe(() => {
       this.workers = this.workers.filter(w => w._id !== userId);
-      this.snackBar.open('Car deleted successfully', 'Dismiss', {
+      this.snackBar.open('User deleted successfully', 'Dismiss', {
         duration: 3000,
         horizontalPosition: 'center',
         verticalPosition: 'top'

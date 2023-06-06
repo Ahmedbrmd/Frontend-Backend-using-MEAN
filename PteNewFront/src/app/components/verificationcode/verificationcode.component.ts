@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 
 @Component({
   selector: 'verificationcode',
@@ -17,8 +17,8 @@ export class VerificationcodeComponent {
 
 constructor(private http : HttpClient ,
             private router:Router ,
-             private route: ActivatedRoute,
-             private snackBar: MatSnackBar,
+            private route: ActivatedRoute,
+            public dialog: MatDialog
              ){}
 FormCode = new FormGroup({
   code: new FormControl('')})
@@ -44,11 +44,8 @@ FormCode = new FormGroup({
         }
       },
       (error: any) => {
-        this.snackBar.open('Invalid code ', 'Dismiss', {
-          duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top',
-          
+        const dialogRef = this.dialog.open(ErrorDialogComponent, {
+          data: { message: 'Invalid Code' },
         });
       }
     );
